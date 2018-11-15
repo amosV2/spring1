@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:utils="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="address" class="cn.demo.spring.beans.autowire.Address"
+		p:city="Shenzhen" p:street="Nanshan"></bean>
+
+	<bean id="car" class="cn.demo.spring.beans.autowire.Car"
+		  p:brand="Levin" p:price="100000"></bean>
+
+<!--	<bean id="car1" class="cn.demo.spring.beans.autowire.Car"
+		p:brand="Audi" p:price="300000"></bean>-->
+
+	<bean id="person" class="cn.demo.spring.beans.autowire.Person"
+		p:name="Jack" autowire="byType"/>
+
+</beans>

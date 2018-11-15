@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="car1" class="cn.demo.spring.beans.factory.StaticCarFactory" factory-method="getCar">
+		<constructor-arg name="brand" value="audi"></constructor-arg>
+	</bean>
+
+	<bean id="carFactory" class="cn.demo.spring.beans.factory.InstanceCarFactory"></bean>
+
+	<bean id="car2" class="cn.demo.spring.beans.factory.Car" factory-bean="carFactory" factory-method="getCar">
+		<constructor-arg name="brand" value="levin"/>
+	</bean>
+
+</beans>
