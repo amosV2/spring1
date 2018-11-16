@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="arithmeticCalculator" class="cn.demo.spring.aop.aspect.xml.ArithmeticCalculatorImpl"/>
+
+	<bean id="loggingAspect" class="cn.demo.spring.aop.aspect.xml.LoggingAspect"/>
+
+	<bean id="validateAspect" class="cn.demo.spring.aop.aspect.xml.ValidateAspect"/>
+
+	<aop:config>
+		<!--切面表达式-->
+		<aop:pointcut id="loggingPointCut" expression="execution(* cn.demo.spring.aop.aspect.xml.ArithmeticCalculator.*(int,int))"/>
+		<aop:pointcut id="validatePointCut" expression="execution(* cn.demo.spring.aop.aspect.xml.ArithmeticCalculator.add(int,int))"/>
+		<!--切面和通知-->
+		<aop:aspect id="logging" ref="loggingAspect" order="2">
+			<aop:before method="beforeMethod" pointcut-ref="loggingPointCut"/>
+			<aop:after pointcut-ref="loggingPointCut" method="afterMethod"/>
+			<aop:after-returning method="returningMethod" pointcut-ref="loggingPointCut" returning="result"/>
+			<aop:after-throwing method="throwingMethod" pointcut-ref="loggingPointCut" throwing="ex"/>
+			<!--
+			<aop:around method="around" pointcut-ref="loggingPointCut" arg-names="joinPoint"/>
+			-->
+		</aop:aspect>
+
+		<!--切面和通知-->
+		<aop:aspect id="validate" ref="validateAspect" order="1">
+			<aop:before method="beforeMethod" pointcut-ref="validatePointCut"/>
+		</aop:aspect>
+
+
+	</aop:config>
+
+</beans>
